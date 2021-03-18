@@ -129,7 +129,7 @@ durationInput.onkeydown = function (e) {
     !(
       (e.keyCode > 95 && e.keyCode < 106) ||
       (e.keyCode > 45 && e.keyCode < 58) ||
-      (e.keyCode > 34 && e.keyCode < 41) ||
+      (e.keyCode > 34 && e.keyCode < 40) ||
       e.keyCode == 8 ||
       e.keyCode == 13
     )
