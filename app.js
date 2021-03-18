@@ -25,9 +25,11 @@ const showImages = (images) => {
     div.innerHTML = ` <img class="img-fluid img-thumbnail" onclick=selectItem(event,"${image.webformatURL}") src="${image.webformatURL}" alt="${image.tags}">`;
     gallery.appendChild(div);
   });
+  toggleSpinner('search-spinner'); 
 };
 
 const getImages = (query) => {
+  toggleSpinner('search-spinner');
   fetch(
     `https://pixabay.com/api/?key=${KEY}=${query}&image_type=photo&pretty=true`
   )
@@ -84,6 +86,7 @@ const createSlider = () => {
     //alert('Select at least 2 image.')
     return;
   }
+  toggleSpinner('slider-spinner');
   // crate slider previous next area
   sliderContainer.innerHTML = "";
   const prevNext = document.createElement("div");
@@ -117,6 +120,7 @@ const createSlider = () => {
     slideIndex++;
     changeSlide(slideIndex);
   }, durationInput.value);
+  toggleSpinner('slider-spinner');
 };
 
 durationInput.onkeydown = function (e) {
@@ -194,7 +198,14 @@ function searchImage() {
   document.querySelector(".main").style.display = "none";
   clearInterval(timer);
   const search = document.getElementById("search");
+  //toggleSpinner('loading-spinner');
   getImages(search.value);
   sliders.length = 0;
 }
 
+// spinner
+
+const toggleSpinner = (id) => {
+  const spinner = document.getElementById(id);
+  spinner.classList.toggle('d-none');
+}
